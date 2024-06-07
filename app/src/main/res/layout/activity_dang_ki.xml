@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.DangKiActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:textSize="35dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Đăng Kí" />
+
+    <EditText
+        android:id="@+id/edtTaiKhoan_DK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/baseline_account_box_24"
+        android:drawablePadding="5sp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Tài Khoản"/>
+
+    <EditText
+        android:id="@+id/edtMatKhau_DK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/baseline_password_24"
+        android:drawablePadding="5sp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Mật Khẩu"/>
+
+    <EditText
+        android:id="@+id/edtNhapLaiMK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/baseline_password_24"
+        android:drawablePadding="5sp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Nhập Lại Mật Khẩu"/>
+
+    <Button
+        android:id="@+id/btnDangKi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Đăng Kí" />
+</LinearLayout>
