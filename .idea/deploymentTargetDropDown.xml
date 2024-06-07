@@ -5,16 +5,16 @@
       <entry key="ActivityTable">
         <State />
       </entry>
-      <entry key="CustomerMainActivity">
-        <State />
-      </entry>
       <entry key="DangNhapActivity">
         <State />
       </entry>
       <entry key="DinningTableMainActivity">
         <State />
       </entry>
-      <entry key="MainActivity2">
+      <entry key="LoaiMonAnActivity">
+        <State />
+      </entry>
+      <entry key="MonAnActivity">
         <State />
       </entry>
       <entry key="app">

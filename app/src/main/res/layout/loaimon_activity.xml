@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5FFFA"
+    tools:context=".activities.LoaiMonAnActivity">
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#6495ED"
+        android:textStyle="bold"
+        android:textSize="15pt"
+        android:gravity="center"
+        android:text="Thông Tin Loại Món Ăn" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#9370DB"
+        android:text="Mã loại món" />
+
+    <EditText
+        android:id="@+id/edtMaLoaiMon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/black"
+        android:inputType="textPersonName"
+        android:hint="Ma Loai Mon" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#9370DB"
+        android:text="Tên Món" />
+
+    <EditText
+        android:id="@+id/edtTenLoaiMon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/black"
+        android:inputType="textPersonName"
+        android:hint="Tên Loại Món" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnLuu"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="#7B68EE"
+
+            android:text="Thêm"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnSua"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Sửa" />
+
+        <Button
+            android:id="@+id/btnHuy"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="#EE82EE"
+            android:text="Hủy"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnXoa"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="#1E90FF"
+            android:text="Xóa"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvLoaiMon"
+        android:layout_width="match_parent"
+        android:layout_height="500dp" />
+
+</LinearLayout>
