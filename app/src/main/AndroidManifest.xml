@@ -15,6 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ManageRestaurantApp"
         tools:targetApi="31">
+
+        <activity
+            android:name=".activities.ActivityCart"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ActivityOrder"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ActivityTable"
+            android:exported="true" />
         <activity
             android:name=".activities.QLyActivity"
             android:exported="false" />

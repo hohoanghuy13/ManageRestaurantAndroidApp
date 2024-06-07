@@ -50,4 +50,9 @@ dependencies {
     implementation("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
     //paper
     implementation("io.github.pilgr:paperdb:2.7.2")
+
+    //circle
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("me.relex:circleindicator:2.1.6")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }
