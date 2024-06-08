@@ -40,6 +40,9 @@ public class CustomAdapterDinningTable extends ArrayAdapter  {
         TextView tvID = (TextView) convertView.findViewById(R.id.tv_TableID);
         String id = String.valueOf(dinningTable.getTableid());
         tvID.setText(id);
+        TextView tvTableFloor = (TextView) convertView.findViewById(R.id.tv_TableFloor);
+        String Floor = String.valueOf(dinningTable.getTableFloor());
+        tvTableFloor.setText(Floor);
         TextView tvseat = (TextView) convertView.findViewById(R.id.tv_Seatable);
         String seat = String.valueOf(dinningTable.getSeat());
         tvseat.setText(seat);

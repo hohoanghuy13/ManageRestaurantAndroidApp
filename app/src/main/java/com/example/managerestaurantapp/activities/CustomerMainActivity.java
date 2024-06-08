@@ -35,11 +35,11 @@ public class CustomerMainActivity extends AppCompatActivity {
 
     ArrayList<Customer> lsCustomer = new ArrayList<>();
     CustomAdapterCustomer customAdapterCustomer;
-    String ip = "192.168.1.8";
-    String url = "http://" + ip +"/Phuong/CustomerShow.php";
-    String urlInsert = "http://" + ip +"/Phuong/insertCustomer.php";
-    String urlDelete = "http://" + ip +"/Phuong/deleteCustomer.php";
-    String urlUpdate = "http://" + ip +"/Phuong/updateCustomer.php";
+    String ip = "192.168.114.1";
+    String url = "http://" + ip +"/QuanLyNhaHang/CustomerShow.php";
+    String urlInsert = "http://" + ip +"/QuanLyNhaHang/insertCustomer.php";
+    String urlDelete = "http://" + ip +"/QuanLyNhaHang/deleteCustomer.php";
+    String urlUpdate = "http://" + ip +"/QuanLyNhaHang/updateCustomer.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

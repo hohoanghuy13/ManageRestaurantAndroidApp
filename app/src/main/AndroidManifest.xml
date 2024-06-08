@@ -50,10 +50,10 @@
             android:name=".activities.CustomerMainActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.DinningTableMainActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.DinningTableMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

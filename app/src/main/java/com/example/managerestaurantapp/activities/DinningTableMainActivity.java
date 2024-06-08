@@ -3,9 +3,11 @@ package com.example.managerestaurantapp.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,19 +34,26 @@ public class DinningTableMainActivity extends AppCompatActivity {
     Button btn_Add,btn_Delete,btn_Update,btn_Reset;
     EditText edt_TableID,edt_SeatCount,edt_Note;
     ListView lv_DiningTables;
+    Spinner spinnerTableFloor;
+    ArrayList<Integer> data = new ArrayList<>();
     CustomAdapterDinningTable customAdapterDinningTable;
     ArrayList<DinningTable> lsDinningTable = new ArrayList<>();
-    String ip = "192.168.1.8";
-    String url = "http://" + ip +"/Phuong/DiningTableShow.php";
-    String urlInsert = "http://" + ip +"/Phuong/insertDiningTable.php";
-    String urlDelete = "http://" + ip +"/Phuong/deleteDiningTable.php";
-    String urlUpdate= "http://" + ip +"/Phuong/updateDiningTable.php";
+    String ip = "192.168.114.1";
+    String url = "http://" + ip +"/QuanLyNhaHang/DiningTableShow.php";
+    String urlInsert = "http://" + ip +"/QuanLyNhaHang/insertDiningTable.php";
+    String urlDelete = "http://" + ip +"/QuanLyNhaHang/deleteDiningTable.php";
+    String urlUpdate= "http://" + ip +"/QuanLyNhaHang/updateDiningTable.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dinning_table_main);
 
         addControls();
+        ////////////////
+        data.add(1);
+        data.add(2);
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,data);
+        spinnerTableFloor.setAdapter(adapter);
         ////////////////
         loadDatabase();
         //////////////////////////////
@@ -85,6 +94,7 @@ public class DinningTableMainActivity extends AppCompatActivity {
             JSONObject table = dssvObject.getJSONObject(i);
             DinningTable a  = new DinningTable();
             a.setTableid(table.getInt("TableID"));
+            a.setTableFloor(table.getInt("TableFloor"));
             a.setSeat(table.getInt("SeatCount"));
             a.setNote(table.getString("Note"));
             lsDinningTable.add(a);
@@ -105,6 +115,7 @@ public class DinningTableMainActivity extends AppCompatActivity {
         btn_Delete = findViewById(R.id.btn_Delete);
         btn_Update = findViewById(R.id.btn_Update);
         btn_Reset = findViewById(R.id.btn_Reset);
+        spinnerTableFloor =  findViewById(R.id.spinnerTableFloor);
     }
 
     private void addEvents()
@@ -117,6 +128,7 @@ public class DinningTableMainActivity extends AppCompatActivity {
                 edt_TableID.setEnabled(false);//Không được chỉnh sửa
                 edt_SeatCount.setText(String.valueOf(lsDinningTable.get(position).getSeat()));
                 edt_Note.setText(lsDinningTable.get(position).getNote());
+                spinnerTableFloor.setSelection(lsDinningTable.get(position).getTableFloor() - 1);
             }
         });
 
@@ -180,16 +192,22 @@ public class DinningTableMainActivity extends AppCompatActivity {
     {
         int id =  Integer.parseInt(edt_TableID.getText().toString());
         int seatCount  = Integer.parseInt(edt_SeatCount.getText().toString());
+        Integer selectedItem = (Integer) spinnerTableFloor.getSelectedItem();
+
         String note = edt_Note.getText().toString();
         JSONObject jsonObject = new JSONObject();
         try {
             DinningTable dinningTable = new DinningTable();
             jsonObject.put("TableID",id);
+            jsonObject.put("TableFloor",selectedItem);
             jsonObject.put("SeatCount",seatCount);
             jsonObject.put("Note",note);
+
             dinningTable.setTableid(id);
+            dinningTable.setTableFloor(selectedItem);
             dinningTable.setSeat(seatCount);
             dinningTable.setNote(note);
+
             them(jsonObject);
             lsDinningTable.add(dinningTable);
 //            Toast.makeText(getApplicationContext()," Tạo được  Json" ,Toast.LENGTH_LONG).show();
@@ -282,16 +300,19 @@ public class DinningTableMainActivity extends AppCompatActivity {
     {
         int id =  Integer.parseInt(edt_TableID.getText().toString());
         int seatCount  = Integer.parseInt(edt_SeatCount.getText().toString());
+        Integer selectedItem = (Integer) spinnerTableFloor.getSelectedItem();
         String note = edt_Note.getText().toString();
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("TableID",id);
+            jsonObject.put("TableFloor",selectedItem);
             jsonObject.put("SeatCount",seatCount);
             jsonObject.put("Note",note);
             update(jsonObject);
             int index = FindDinningTableByID(lsDinningTable,id);
             lsDinningTable.get(index).setSeat(seatCount);
             lsDinningTable.get(index).setNote(note);
+            lsDinningTable.get(index).setTableFloor(selectedItem);
 //            Toast.makeText(getApplicationContext()," Tạo được  Json" ,Toast.LENGTH_LONG).show();
         }
         catch(JSONException e)
