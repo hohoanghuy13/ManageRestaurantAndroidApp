@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F5FFFA"
+    android:padding="10dp"
     tools:context=".activities.LoaiMonAnActivity">
 
     <TextView
@@ -69,13 +70,14 @@
         <Button
             android:id="@+id/btnSua"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="#EE82EE"
             android:text="Sửa" />
 
         <Button
             android:id="@+id/btnHuy"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="#EE82EE"
             android:text="Hủy"
             android:textColor="@color/white" />
@@ -83,7 +85,7 @@
         <Button
             android:id="@+id/btnXoa"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="#1E90FF"
             android:text="Xóa"
             android:textColor="@color/white" />

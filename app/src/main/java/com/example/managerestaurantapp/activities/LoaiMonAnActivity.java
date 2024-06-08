@@ -2,7 +2,6 @@ package com.example.managerestaurantapp.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,16 +41,15 @@ public class LoaiMonAnActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     CustomAdapterLoaiMonAn adapterLoaiMon;
     ArrayList<MonAn> lsMonAn = new ArrayList<MonAn>();
-
-    String urlInsert = Util.BASE_URL + "/Ngoc/Insert_DishCategory.php";
-    String urlDelete = Util.BASE_URL + "/Ngoc/Delete_DishCategory.php";
-    String urlUpdate= Util.BASE_URL + "/Ngoc/Update_DishCategory.php";
+    String urlInsert = Util.BASE_URL + "Ngoc/Insert_DishCategory.php";
+    String urlDelete = Util.BASE_URL + "Ngoc/Delete_DishCategory.php";
+    String urlUpdate= Util.BASE_URL + "Ngoc/Update_DishCategory.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loaimon_activity);
-        String url = Util.BASE_URL + "/Ngoc/Data_Category.php";
+        String url = Util.BASE_URL + "Ngoc/Data_Category.php";
         addControls();
         getAllDataDish(url);
         addEvents();
@@ -156,38 +154,31 @@ public class LoaiMonAnActivity extends AppCompatActivity {
         edtTenLoaiMon.setText("");
 
     }
-    private boolean isMaMonExist(int maLoaiMon) {
-        for (LoaiMonAn loaimonAn : lsLoaiMonAn) {
-            if (loaimonAn.getMaLoaiMonAn() == maLoaiMon) {
-                return true;
-            }
-        }
-        return false;
-    }
     private void sunmitFormInsert() {
-        int maLoai = Integer.parseInt(edtMaLoaiMon.getText().toString());
-        if (isMaMonExist(maLoai)) {
-            Toast.makeText(getApplicationContext(), "Mã món đã tồn tại trong danh sách", Toast.LENGTH_LONG).show();
+        String idStr = edtMaLoaiMon.getText().toString().trim();
+        String name = edtTenLoaiMon.getText().toString().trim();
+        if (idStr.isEmpty() || name.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
             return;
         }
-        String tenLoaiMon = edtTenLoaiMon.getText().toString();
         try {
-            LoaiMonAn loaimonAn = new LoaiMonAn();
+            int id = Integer.parseInt(idStr);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("CategoryID", maLoai);
-            jsonObject.put("CategoryName",tenLoaiMon);
-            loaimonAn.setMaLoaiMonAn(maLoai);
-            loaimonAn.setTenLoaiMonAn(tenLoaiMon);
-            // Thêm món vào danh sách
+            jsonObject.put("CategoryID", id);
+            jsonObject.put("CategoryName", name);
+            LoaiMonAn loaiMonAn = new LoaiMonAn();
+            loaiMonAn.setMaLoaiMonAn(id);
+            loaiMonAn.setTenLoaiMonAn(name);
             them(jsonObject);
-            lsLoaiMonAn.add(loaimonAn);
-            //refreshListView();
+            lsLoaiMonAn.add(loaiMonAn);
         } catch (JSONException e) {
-            Log.d("API", e.toString());
+            Toast.makeText(getApplicationContext(), "Error creating JSON", Toast.LENGTH_LONG).show();
         } catch (NumberFormatException e) {
-            Toast.makeText(getApplicationContext(), "Please enter valid number", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Invalid number format for Category ID", Toast.LENGTH_LONG).show();
         }
     }
+
+
     private void them(JSONObject loaiMonAn)
     {
         RequestQueue queue = Volley.newRequestQueue(LoaiMonAnActivity.this);
@@ -213,6 +204,7 @@ public class LoaiMonAnActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Loại món ăn đang được sử dụng trong các món ăn, không thể xóa.", Toast.LENGTH_LONG).show();
             } else {
                 delete(jsonObject);
+
             }
         } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), "Lỗi tạo JSON", Toast.LENGTH_LONG).show();
@@ -234,6 +226,14 @@ public class LoaiMonAnActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(LoaiMonAnActivity.this,"Xóa Thành Công" + response.toString(),Toast.LENGTH_LONG).show();
+                lsLoaiMonAn.removeIf(r -> {
+                    try {
+                        return r.getMaLoaiMonAn() == loaiMonAn.getInt("CategoryID");
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                adapterLoaiMon.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -263,10 +263,15 @@ public class LoaiMonAnActivity extends AppCompatActivity {
     }
 
     private void submitFormUpdate() {
-        int id = Integer.parseInt(edtMaLoaiMon.getText().toString());
+        String idStr = edtMaLoaiMon.getText().toString().trim();
         String name = edtTenLoaiMon.getText().toString().trim();
+        if (idStr.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
+            return;
+        }
         try {
             JSONObject jsonObject = new JSONObject();
+            int id = Integer.parseInt(idStr);
             jsonObject.put("CategoryID", id);
             jsonObject.put("CategoryName", name); // Ensure 'name' is also added to the JSON
             update(jsonObject);
@@ -277,7 +282,6 @@ public class LoaiMonAnActivity extends AppCompatActivity {
             Log.d("Error", e.toString());
         }
     }
-
     public static int FindDinningMaLoaiMon(ArrayList<LoaiMonAn> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getMaLoaiMonAn() == id) {

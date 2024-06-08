@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.interfaces.OnItemClickListener;
-import com.example.managerestaurantapp.models.DiningTable2;
+import com.example.managerestaurantapp.models.DiningTable;
 import com.example.managerestaurantapp.models.TableService;
 import com.example.managerestaurantapp.services.ApiService;
 
@@ -22,10 +22,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdapterTable extends RecyclerView.Adapter<AdapterTable.TableViewHolder> {
-    List<DiningTable2> lstTable;
+    List<DiningTable> lstTable;
     OnItemClickListener event;
 
-    public AdapterTable(List<DiningTable2> lstTable, OnItemClickListener event) {
+    public AdapterTable(List<DiningTable> lstTable, OnItemClickListener event) {
         this.lstTable = lstTable;
         this.event = event;
     }
@@ -40,7 +40,7 @@ public class AdapterTable extends RecyclerView.Adapter<AdapterTable.TableViewHol
 
     @Override
     public void onBindViewHolder(@NonNull TableViewHolder holder, int position) {
-        DiningTable2 table = lstTable.get(position);
+        DiningTable table = lstTable.get(position);
 
         if(table == null){
             return;

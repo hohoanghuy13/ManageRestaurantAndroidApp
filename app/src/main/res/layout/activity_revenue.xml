@@ -73,10 +73,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191" />
+        app:layout_constraintVertical_bias="0.248" />
 
     <TextView
         android:id="@+id/textViewDoanhThuMin"
@@ -84,10 +84,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.248" />
+        app:layout_constraintVertical_bias="0.191" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -106,4 +106,5 @@
             android:layout_height="match_parent">
         </com.github.mikephil.charting.charts.LineChart>
     </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

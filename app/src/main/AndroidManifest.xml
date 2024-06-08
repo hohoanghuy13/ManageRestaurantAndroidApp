@@ -38,7 +38,8 @@
             android:exported="false" />
         <activity
             android:name=".activities.AdminActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>
         <activity
             android:name=".activities.QuenMKActivity"
             android:exported="false" />
@@ -46,16 +47,16 @@
             android:name=".activities.DangKiActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DangNhapActivity"
+            android:name=".activities.DinningTableMainActivity"
             android:exported="true" />
         <activity
             android:name=".activities.CustomerMainActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.DinningTableMainActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.DangNhapActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

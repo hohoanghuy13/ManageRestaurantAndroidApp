@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.adapters.CustomAdapterCustomer;
 import com.example.managerestaurantapp.models.Customer;
+import com.example.managerestaurantapp.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,11 +36,10 @@ public class CustomerMainActivity extends AppCompatActivity {
 
     ArrayList<Customer> lsCustomer = new ArrayList<>();
     CustomAdapterCustomer customAdapterCustomer;
-    String ip = "192.168.1.8";
-    String url = "http://" + ip +"/Phuong/CustomerShow.php";
-    String urlInsert = "http://" + ip +"/Phuong/insertCustomer.php";
-    String urlDelete = "http://" + ip +"/Phuong/deleteCustomer.php";
-    String urlUpdate = "http://" + ip +"/Phuong/updateCustomer.php";
+    String url = Util.BASE_URL + "Phuong/CustomerShow.php";
+    String urlInsert = Util.BASE_URL + "Phuong/insertCustomer.php";
+    String urlDelete = Util.BASE_URL + "Phuong/deleteCustomer.php";
+    String urlUpdate = Util.BASE_URL + "Phuong/updateCustomer.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +47,6 @@ public class CustomerMainActivity extends AppCompatActivity {
         addControls();
         loadDatabase();
         addEvents();
-
-
     }
 
     private void addControls()

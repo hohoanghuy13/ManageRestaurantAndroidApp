@@ -1,6 +1,6 @@
 package com.example.managerestaurantapp.services;
 
-import com.example.managerestaurantapp.models.DiningTable2;
+import com.example.managerestaurantapp.models.DiningTable;
 import com.example.managerestaurantapp.models.Dish;
 import com.example.managerestaurantapp.models.DishCategory;
 import com.example.managerestaurantapp.models.Message;
@@ -11,7 +11,6 @@ import com.example.managerestaurantapp.models.TableService;
 import com.example.managerestaurantapp.utils.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.example.managerestaurantapp.R;
 
 import java.util.List;
 
@@ -35,61 +34,61 @@ public interface ApiService {
             .build()
             .create(ApiService.class);
 
-    @GET("apirestaurant/diningtable/")
-    Call<List<DiningTable2>> getAllTables();
+    @GET("Huy/diningtable/")
+    Call<List<DiningTable>> getAllTables();
 
-    @GET("apirestaurant/dishes/")
+    @GET("Huy/dishes/")
     Call<List<Dish>> getAllDishes();
 
-    @GET("apirestaurant/dishes/{id}")
+    @GET("Huy/dishes/{id}")
     Call<Dish> getDish(@Path("id") int dishId);
 
-    @GET("apirestaurant/categories")
+    @GET("Huy/categories")
     Call<List<DishCategory>> getAllCategories();
 
-    @GET("apirestaurant/tableservice")
+    @GET("Huy/tableservice")
     Call<List<TableService>> getAllServices();
 
-    @GET("apirestaurant/tableservice")
+    @GET("Huy/tableservice")
     Call<TableService> getServiceNotPay(@Query("tableid") int tableId);
 
-    @GET("apirestaurant/tabledish/{id}")
+    @GET("Huy/tabledish/{id}")
     Call<List<TableDish>> getDishesByService(@Path("id") int serviceId);
 
     @FormUrlEncoded
-    @POST("apirestaurant/tableservice/")
+    @POST("Huy/tableservice/")
     Call<Message> createNewServiceByTable(@Field("CustomerID") int customerId, @Field("TableID") int tableId, @Field("StartTime") String startTime);
 
-    @GET("apirestaurant/payment/{id}")
+    @GET("Huy/payment/{id}")
     Call<Payment> getPaymentByService(@Path("id") int serviceId);
     @FormUrlEncoded
-    @POST("apirestaurant/payment/")
+    @POST("Huy/payment/")
     Call<Message> createNewPaymentByService(@Field("ServiceID") int serviceId, @Field("EmployeeID") int employeeId);
 
     @FormUrlEncoded
-    @PATCH("apirestaurant/payment/{id}")
+    @PATCH("Huy/payment/{id}")
     Call<Message> updatePayment(@Path("id") int serviceId, @Field("PaymentTime") String paymentTime);
 
-    @GET("apirestaurant/tabledish/{id}")
+    @GET("Huy/tabledish/{id}")
     Call<TableDish> getDishOrder(@Path("id") int serviceId, @Query("dishid") int dishId);
 
     @FormUrlEncoded
-    @POST("apirestaurant/tabledish/")
+    @POST("Huy/tabledish/")
     Call<Message> addDishToOrders(@Field("ServiceID") int serviceId, @Field("DishID") int dishId, @Field("Quantity") int quantity, @Field("UnitPrice") int unitPrice, @Field("Note") String note);
 
     @FormUrlEncoded
-    @PATCH("apirestaurant/tabledish/{id}")
+    @PATCH("Huy/tabledish/{id}")
     Call<Message> updateQuantityDish(@Path("id") int serviceId, @Query("dishid") int dishId, @Field("Quantity") int quantity, @Field("UnitPrice") int unitPrice, @Field("Note") String note);
 
-    //Thiên
-    @GET("/Thien/getDoanhThu.php")
+    @GET("Thien/getDoanhThu.php")
     Call<List<Revenue>> getDoanhThu(@Query("startDate") String startDate,
                                     @Query("endDate") String endDate);
 
-    @GET("/Thien/getDoanhThuCaoNhat.php")
+    @GET("Thien/getDoanhThuCaoNhat.php")
     Call<Revenue> getMaxDoanhThu(@Query("startDate") String startDate,
                                  @Query("endDate") String endDate);
-    @GET("/Thien/getDoanhThuThapNhat.php")
+    @GET("Thien/getDoanhThuThapNhat.php")
     Call<Revenue> getMinDoanhThu(@Query("startDate") String startDate,
                                  @Query("endDate") String endDate);
+
 }

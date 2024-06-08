@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFACD"
+    android:padding="10dp"
     tools:context=".activities.MonAnActivity">
 
     <Button
@@ -13,7 +14,6 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#ADD8E6"
-
         android:text="Thêm Ảnh" />
 
     <LinearLayout
@@ -99,7 +99,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <TextView
@@ -136,7 +136,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-
         android:orientation="horizontal">
 
         <Button
@@ -150,7 +149,7 @@
         <Button
             android:id="@+id/btnHuy"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="#EE82EE"
             android:text="Hủy"
             android:textColor="@color/white" />
@@ -158,14 +157,14 @@
         <Button
             android:id="@+id/btnSua"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="#ADD8E6"
             android:text="Sửa" />
 
         <Button
             android:id="@+id/btnXoa"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="#1E90FF"
             android:text="Xóa"
             android:textColor="@color/white" />
@@ -175,8 +174,6 @@
         android:id="@+id/lvMonAn"
         android:layout_width="match_parent"
         android:background="#FFFACD"
-        android:layout_height="400dp" >
-
-    </ListView>
+        android:layout_height="250dp" />
 
 </LinearLayout>
