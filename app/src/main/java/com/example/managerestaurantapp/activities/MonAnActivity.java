@@ -32,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.adapters.CustomAdapterMonAn;
 import com.example.managerestaurantapp.models.MonAn;
+import com.example.managerestaurantapp.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,9 +48,7 @@ public class MonAnActivity extends AppCompatActivity {
     EditText edtMaMon, edtTenMon, edtDonGia, edtMaLoaiMon;
     Button btnLuu, btnHuy,btnXoa,btnSua,btnXem;
 
-    //Spinner spMaLoaiMonAn;
     ListView lvMonAn;
-    private Uri imageUri;
     private RequestQueue requestQueue;
     ArrayList<MonAn> lsMonAn = new ArrayList<MonAn>();
     ArrayAdapter<String> adapter;
@@ -58,18 +57,16 @@ public class MonAnActivity extends AppCompatActivity {
     Button btnThemAnh;
     ImageView imgAnh;
     Spinner spinnerMaLoai;
-    private Bitmap bitmap;
-   String ip2 = "192.168.2.156:8080";
-    String ip = "192.168.1.8";
-    String urlInsert = "http://"+ip+"/Ngoc/Insert_Dish.php";
-    String urlDelete = "http://"+ip+"/Ngoc/DeleteDish.php";
-    String urlUpdate= "http://"+ip+"/Ngoc/Update_dish.php";
+//    String ip = "192.168.1.8";
+    String urlInsert = Util.BASE_URL + "Ngoc/Insert_Dish.php";
+    String urlDelete = Util.BASE_URL + "Ngoc/DeleteDish.php";
+    String urlUpdate= Util.BASE_URL + "Ngoc/Update_dish.php";
     private static final int PICK_IMAGE_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monan);
-        String url = "http://"+ip+"/Ngoc/Data.php";
+        String url = Util.BASE_URL + "/Ngoc/Data.php";
         addControls();
         getAllDataDish(url);
         addEvents();
@@ -98,8 +95,6 @@ public class MonAnActivity extends AppCompatActivity {
                 edtMaMon.setText(String.valueOf(monAn.getMaMon()));
                 edtTenMon.setText(monAn.getTenMon());
                 edtDonGia.setText(String.valueOf(monAn.getGiaMon()));
-//                edtMaLoaiMon.setText(String.valueOf(monAn.getMaLoaiMon()));
-//                Picasso.get().load(monAn.getImageURL()).into(imgAnh);
             }
         });
         btnLuu.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +142,7 @@ public class MonAnActivity extends AppCompatActivity {
           btnThemAnh.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                  openImagePicker();
+
               }
           });
           btnXem.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +186,7 @@ public class MonAnActivity extends AppCompatActivity {
         JSONObject object  = new JSONObject(response);
         JSONArray dsmonanObject = object.getJSONArray("dishes");
         List<String> maLoaiMonList = new ArrayList<>();
-        for(int i = 0;i < dsmonanObject.length();++i)
+        for(int i = 0;i < dsmonanObject.length();i++)
         {
             JSONObject monAn = dsmonanObject.getJSONObject(i);
             MonAn a  = new MonAn();
@@ -203,7 +198,6 @@ public class MonAnActivity extends AppCompatActivity {
             if (!maLoaiMonList.contains(String.valueOf(maLoaiMon))) {
                 maLoaiMonList.add(String.valueOf(maLoaiMon));
             }
-//            a.setImageURL("http://"+ip+"/Ngoc/Image/" + monAn.getString("Image"));
             lsMonAn.add(a);
         }
         adapterMonAn =new CustomAdapterMonAn(getApplicationContext(),R.layout.activity_item_mon_an,lsMonAn);
@@ -220,22 +214,6 @@ public class MonAnActivity extends AppCompatActivity {
         edtMaMon.setEnabled(true);
         edtTenMon.setText("");
         edtDonGia.setText("");
-        imgAnh.setImageResource(0);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
-            imageUri = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                imgAnh.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
     private boolean isMaMonExist(int maMon) {
         for (MonAn monAn : lsMonAn) {
@@ -247,75 +225,42 @@ public class MonAnActivity extends AppCompatActivity {
     }
 
     private void sunmitFormInsert() {
+        int maMon = Integer.parseInt(edtMaMon.getText().toString());
+        if (isMaMonExist(maMon)) {
+            Toast.makeText(getApplicationContext(), "Mã món đã tồn tại trong danh sách", Toast.LENGTH_LONG).show();
+            return;
+        }
+        String tenMon = edtTenMon.getText().toString();
+        int donGia = Integer.parseInt(edtDonGia.getText().toString());
+        // Lấy mã loại món từ Spinner
+        int maLoaiMon = Integer.parseInt(spinnerMaLoai.getSelectedItem().toString());
+        if (TextUtils.isEmpty(edtMaMon.getText()) ||
+                TextUtils.isEmpty(edtTenMon.getText()) ||
+                TextUtils.isEmpty(edtDonGia.getText())) {
+            Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
+            return;
+        }
         try {
-            int maMon = Integer.parseInt(edtMaMon.getText().toString().trim());
-            if (isMaMonExist(maMon)) {
-                Toast.makeText(getApplicationContext(), "Mã món đã tồn tại trong danh sách", Toast.LENGTH_LONG).show();
-                return;
-            }
-            String tenMon = edtTenMon.getText().toString().trim();
-            int donGia = Integer.parseInt(edtDonGia.getText().toString().trim());
-            // Lấy mã loại món từ Spinner
-            int maLoaiMon = Integer.parseInt(spinnerMaLoai.getSelectedItem().toString());
-            if (TextUtils.isEmpty(edtMaMon.getText()) ||
-                    TextUtils.isEmpty(edtTenMon.getText()) ||
-                    TextUtils.isEmpty(edtDonGia.getText())) {
-                Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
-                return;
-            }
-            if (imageUri == null) {
-                Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();
-                return;
-            }
-            String imagePath = getPathFromUri(imageUri);
+            MonAn monAn = new MonAn();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("DishID", maMon);
             jsonObject.put("DishName", tenMon);
             jsonObject.put("UnitPrice", donGia);
             jsonObject.put("CategoryID", maLoaiMon);
-            jsonObject.put("Image", imagePath);
-
             // Thêm món vào danh sách
-            MonAn monAn = new MonAn();
             monAn.setMaMon(maMon);
             monAn.setTenMon(tenMon);
             monAn.setGiaMon(donGia);
             monAn.setMaLoaiMon(maLoaiMon);
-            monAn.setImageURL(imagePath);
-            lsMonAn.add(monAn);
-
-            refreshListView();
             them(jsonObject);
+           lsMonAn.add(monAn);
+            //refreshListView();
         } catch (JSONException e) {
             Log.d("API", e.toString());
         } catch (NumberFormatException e) {
             Toast.makeText(getApplicationContext(), "Please enter valid number", Toast.LENGTH_LONG).show();
-        } catch (NullPointerException e) {
-            Log.d("API", e.toString());
         }
     }
-
-
-    private String getPathFromUri(Uri uri) {
-        if (uri == null) {
-            return null; // Trả về null nếu Uri là null
-        }
-
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            if (cursor.moveToFirst()) {
-                String imagePath = cursor.getString(column_index);
-                cursor.close();
-                return imagePath;
-            }
-            cursor.close();
-        }
-
-        return null; // Trả về null nếu không có dữ liệu hoặc không thể truy cập Cursor
-    }
-
 
     private void them(JSONObject JsonMonAn)
     {
@@ -397,23 +342,17 @@ public class MonAnActivity extends AppCompatActivity {
         int giaMon = Integer.parseInt(edtDonGia.getText().toString());
         // Lấy mã loại món từ Spinner
         int maLoaiMon = Integer.parseInt(spinnerMaLoai.getSelectedItem().toString());
-        String img = null;
-        if (imageUri != null) {
-            img = imageUri.toString();
-        }
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("DishID", maMon);
             jsonObject.put("DishName", tenMon);
             jsonObject.put("UnitPrice", giaMon);
             jsonObject.put("CategoryID", maLoaiMon);
-            jsonObject.put("Image", img);
             update(jsonObject);
             int index = FindDinningMaMon(lsMonAn, maMon);
             lsMonAn.get(index).setGiaMon(giaMon);
             lsMonAn.get(index).setTenMon(tenMon);
             lsMonAn.get(index).setMaLoaiMon(maLoaiMon);
-            lsMonAn.get(index).setImageURL(img);
         } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), "Lỗi Tạo Json", Toast.LENGTH_LONG).show();
         }
@@ -432,20 +371,9 @@ public class MonAnActivity extends AppCompatActivity {
         adapterMonAn.notifyDataSetChanged();
     }
     //Them hinh anh
-    private void openImagePicker() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
 
 
-    private String imageToString(Bitmap bitmap){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,50,byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes,Base64.DEFAULT);
-    }
+
 }
 
 

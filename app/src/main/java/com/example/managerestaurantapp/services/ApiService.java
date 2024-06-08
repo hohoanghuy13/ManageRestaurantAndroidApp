@@ -8,8 +8,10 @@ import com.example.managerestaurantapp.models.Payment;
 import com.example.managerestaurantapp.models.Revenue;
 import com.example.managerestaurantapp.models.TableDish;
 import com.example.managerestaurantapp.models.TableService;
+import com.example.managerestaurantapp.utils.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.example.managerestaurantapp.R;
 
 import java.util.List;
 
@@ -28,7 +30,7 @@ public interface ApiService {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     ApiService apiService = new Retrofit.Builder()
-            .baseUrl("http://192.168.102.237/")
+            .baseUrl(Util.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
