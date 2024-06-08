@@ -11,13 +11,20 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.managerestaurantapp.MainActivity;
 import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.models.Revenue;
 import com.example.managerestaurantapp.services.ApiService;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -29,16 +36,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RevenueActivity extends AppCompatActivity {
-
     private DatePickerDialog datePickerDialog, endDatePickerDialog;
     private Button buttonStartDate, buttonEndDate, buttonThongKe;
 
-    private TextView textViewMaxDoanhThu, textViewMinDoanhThu;
+    private TextView textViewMaxDoanhThu, textViewMinDoanhThu, textViewShowInfor;
     private ArrayList arrayList;
-    private List<Revenue> lstRV = null;
+    private List<Revenue>  lstRV = null;
+
 
     BarChart barChart ;
-
+    LineChart lineChart ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +57,7 @@ public class RevenueActivity extends AppCompatActivity {
         //initBarChart();
 
     }
-    //    void initBarChart() {
-//
-//    }
-//
-//    private List<BarEntry> getBarEntries(List<Revenue> revenueData) {
-//
-//        return barEntries;
-//    }
+
     private void addEvents()
     {
         buttonThongKe.setOnClickListener(new View.OnClickListener() {
@@ -101,24 +101,23 @@ public class RevenueActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<Revenue>> call, Response<List<Revenue>> response) {
                         lstRV = response.body();
-                        List<BarEntry> barEntries = new ArrayList<>();
+                        List<Entry> entries = new ArrayList<>();
                         for (Revenue revenue : lstRV) {
-                            barEntries.add(new BarEntry(
-                                    Float.parseFloat(revenue.getDate().substring(revenue.getDate().length() - 2))
-                                    , Float.parseFloat(revenue.getRevenue())));
-
-
+                            entries.add(new Entry(
+                                    Float.parseFloat(revenue.getDate().substring(revenue.getDate().length() - 2)),
+                                    Float.parseFloat(revenue.getRevenue())/1000
+                            ));
                         }
-                        BarDataSet barDataSet = new BarDataSet(barEntries,"Doanh thu");
-                        BarData barData = new BarData(barDataSet);
-                        barChart.setData(barData);
-                        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-                        barDataSet.setValueTextSize(16f);
-                        barChart.setFitBars(true);
-                        barChart.getDescription().setEnabled(false);
-                        barChart.setDrawGridBackground(false);
-                        barChart.animateY(1000);
-                        barChart.invalidate();
+
+                        LineDataSet dataSet = new LineDataSet(entries, "Doanh thu");
+                        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                        dataSet.setValueTextSize(14f);
+                        LineData lineData = new LineData(dataSet);
+                        lineChart.setData(lineData);
+                        lineChart.getDescription().setEnabled(false);
+                        lineChart.setDrawGridBackground(false);
+                        lineChart.animateX(1000);
+                        lineChart.invalidate();
                     }
 
                     @Override
@@ -128,7 +127,19 @@ public class RevenueActivity extends AppCompatActivity {
                 });
             }
         });
+        lineChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                float x = e.getX();
+                float y = e.getY();
+                Toast.makeText(RevenueActivity.this, "Ngày: " + x + ", Doanh thu: " + y, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(){
 
+            }
+
+        });
     }
     String getToday()
     {
@@ -143,12 +154,12 @@ public class RevenueActivity extends AppCompatActivity {
     {
         buttonThongKe = (Button) findViewById(R.id.buttonThongKe);
         buttonStartDate = (Button) findViewById(R.id.buttonStartDate);
-        buttonStartDate.setText(getToday());
+        buttonStartDate.setText(getToday());//
         buttonEndDate = (Button) findViewById(R.id.buttonEndDate);
         buttonEndDate.setText(getToday());
         textViewMaxDoanhThu = (TextView) findViewById(R.id.textViewDoanhThuMax);
         textViewMinDoanhThu = (TextView) findViewById(R.id.textViewDoanhThuMin);
-        barChart = (BarChart) findViewById(R.id.barchart);
+        lineChart = (LineChart) findViewById(R.id.linechart);
     }
     void initDatePicker()
     {
