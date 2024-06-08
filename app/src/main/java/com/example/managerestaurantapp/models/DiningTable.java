@@ -1,29 +1,17 @@
 package com.example.managerestaurantapp.models;
 
-public class DiningTable2 {
-    private int TableID, TableFloor, SeatCount, TableState;
+public class DiningTable {
+    private int TableID, TableFloor, SeatCount;
     private String Note;
 
-    public DiningTable2(int tableID, int tableFloor, int seatCount, int tableState, String note) {
+    public DiningTable(int tableID, int tableFloor, int seatCount, String note) {
         TableID = tableID;
         TableFloor = tableFloor;
         SeatCount = seatCount;
-        TableState = tableState;
         Note = note;
     }
 
-    @Override
-    public String toString() {
-        return "DinningTable{" +
-                "TableID=" + TableID +
-                ", TableFloor=" + TableFloor +
-                ", SeatCount=" + SeatCount +
-                ", TableState=" + TableState +
-                ", Note='" + Note + '\'' +
-                '}';
-    }
-
-    public DiningTable2() {
+    public DiningTable() {
     }
 
     public int getTableID() {
@@ -48,14 +36,6 @@ public class DiningTable2 {
 
     public void setSeatCount(int seatCount) {
         SeatCount = seatCount;
-    }
-
-    public int getTableState() {
-        return TableState;
-    }
-
-    public void setTableState(int tableState) {
-        TableState = tableState;
     }
 
     public String getNote() {

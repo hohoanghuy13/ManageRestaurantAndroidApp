@@ -10,10 +10,10 @@ import retrofit2.http.POST;
 public interface Api {
 
     //Get data
-    @GET("getaccount.php")
+    @GET("Cong/getaccount.php")
     Observable<UserModel> getAccount();
 
-    @GET("getrole.php")
+    @GET("Cong/getrole.php")
     Observable<UserModel> getRole(
             @Field("AccountName") String acc,
             @Field("Password") String pass
@@ -22,20 +22,20 @@ public interface Api {
     //------------------------------------------------------------
 
     //Post data
-    @POST("dangki.php")
+    @POST("Cong/dangki.php")
     @FormUrlEncoded
     Observable<UserModel> dangKi(
             @Field("AccountName") String acc,
             @Field("Password") String pass
     );
-    @POST("dangnhap.php")
+    @POST("Cong/dangnhap.php")
     @FormUrlEncoded
     Observable<UserModel> dangNhap(
             @Field("AccountName") String acc,
             @Field("Password") String pass
     );
 
-    @POST("guilienket.php")
+    @POST("Cong/guilienket.php")
     @FormUrlEncoded
     Observable<UserModel> layLaiMK(
             @Field("email") String email

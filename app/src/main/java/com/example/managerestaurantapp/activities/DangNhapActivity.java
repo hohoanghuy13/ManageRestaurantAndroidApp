@@ -119,7 +119,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                 } else if (role.equals("quanly")) {
                                     intent = new Intent(getApplicationContext(), QLyActivity.class);
                                 } else {
-                                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent = new Intent(getApplicationContext(), ActivityTable.class);
                                 }
 
                                 startActivity(intent);

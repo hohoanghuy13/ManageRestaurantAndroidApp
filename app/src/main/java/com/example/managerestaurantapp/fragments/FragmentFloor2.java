@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.managerestaurantapp.R;
+import com.example.managerestaurantapp.models.DiningTable;
 import com.example.managerestaurantapp.services.ApiService;
 import com.example.managerestaurantapp.interfaces.OnItemClickListener;
-import com.example.managerestaurantapp.models.DiningTable2;
 import com.example.managerestaurantapp.activities.ActivityOrder;
 import com.example.managerestaurantapp.adapters.AdapterTable;
 
@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class FragmentFloor2 extends Fragment implements OnItemClickListener {
     RecyclerView rcvTable;
     AdapterTable adapterTable;
-    List<DiningTable2> lstTable = new ArrayList<>();
+    List<DiningTable> lstTable = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,9 +97,9 @@ public class FragmentFloor2 extends Fragment implements OnItemClickListener {
     }
 
     void loadListTable() {
-        ApiService.apiService.getAllTables().enqueue(new Callback<List<DiningTable2>>() {
+        ApiService.apiService.getAllTables().enqueue(new Callback<List<DiningTable>>() {
             @Override
-            public void onResponse(Call<List<DiningTable2>> call, Response<List<DiningTable2>> response) {
+            public void onResponse(Call<List<DiningTable>> call, Response<List<DiningTable>> response) {
                 if(response.isSuccessful()){
                     lstTable = response.body();
 
@@ -108,7 +108,7 @@ public class FragmentFloor2 extends Fragment implements OnItemClickListener {
             }
 
             @Override
-            public void onFailure(Call<List<DiningTable2>> call, Throwable t) {
+            public void onFailure(Call<List<DiningTable>> call, Throwable t) {
 
             }
         });
@@ -121,7 +121,7 @@ public class FragmentFloor2 extends Fragment implements OnItemClickListener {
     }
     @Override
     public void onItemClick(int i) {
-        DiningTable2 table = lstTable.get(i);
+        DiningTable table = lstTable.get(i);
         Intent intentTable = new Intent(getActivity(), ActivityOrder.class);
         Bundle bundleDataTable = new Bundle();
         bundleDataTable.putInt("tableId", table.getTableID());

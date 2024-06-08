@@ -21,7 +21,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.adapters.CustomAdapterDinningTable;
-import com.example.managerestaurantapp.models.DinningTable;
+import com.example.managerestaurantapp.models.DiningTable;
+import com.example.managerestaurantapp.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,12 +38,11 @@ public class DinningTableMainActivity extends AppCompatActivity {
     Spinner spinnerTableFloor;
     ArrayList<Integer> data = new ArrayList<>();
     CustomAdapterDinningTable customAdapterDinningTable;
-    ArrayList<DinningTable> lsDinningTable = new ArrayList<>();
-    String ip = "192.168.114.1";
-    String url = "http://" + ip +"/QuanLyNhaHang/DiningTableShow.php";
-    String urlInsert = "http://" + ip +"/QuanLyNhaHang/insertDiningTable.php";
-    String urlDelete = "http://" + ip +"/QuanLyNhaHang/deleteDiningTable.php";
-    String urlUpdate= "http://" + ip +"/QuanLyNhaHang/updateDiningTable.php";
+    ArrayList<DiningTable> lsDinningTable = new ArrayList<>();
+    String url = Util.BASE_URL + "Phuong/DiningTableShow.php";
+    String urlInsert = Util.BASE_URL + "Phuong/insertDiningTable.php";
+    String urlDelete = Util.BASE_URL + "Phuong/deleteDiningTable.php";
+    String urlUpdate= Util.BASE_URL + "Phuong/updateDiningTable.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +58,6 @@ public class DinningTableMainActivity extends AppCompatActivity {
         loadDatabase();
         //////////////////////////////
         addEvents();
-
-
-
     }
 
     public void loadDatabase()
@@ -92,10 +89,10 @@ public class DinningTableMainActivity extends AppCompatActivity {
         for(int i=0;i<dssvObject.length();i++)
         {
             JSONObject table = dssvObject.getJSONObject(i);
-            DinningTable a  = new DinningTable();
-            a.setTableid(table.getInt("TableID"));
+            DiningTable a  = new DiningTable();
+            a.setTableID(table.getInt("TableID"));
             a.setTableFloor(table.getInt("TableFloor"));
-            a.setSeat(table.getInt("SeatCount"));
+            a.setSeatCount(table.getInt("SeatCount"));
             a.setNote(table.getString("Note"));
             lsDinningTable.add(a);
         }
@@ -124,9 +121,9 @@ public class DinningTableMainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Object item = parent.getItemAtPosition(position);
-                edt_TableID.setText(String.valueOf(lsDinningTable.get(position).getTableid()));
+                edt_TableID.setText(String.valueOf(lsDinningTable.get(position).getTableID()));
                 edt_TableID.setEnabled(false);//Không được chỉnh sửa
-                edt_SeatCount.setText(String.valueOf(lsDinningTable.get(position).getSeat()));
+                edt_SeatCount.setText(String.valueOf(lsDinningTable.get(position).getSeatCount()));
                 edt_Note.setText(lsDinningTable.get(position).getNote());
                 spinnerTableFloor.setSelection(lsDinningTable.get(position).getTableFloor() - 1);
             }
@@ -197,15 +194,15 @@ public class DinningTableMainActivity extends AppCompatActivity {
         String note = edt_Note.getText().toString();
         JSONObject jsonObject = new JSONObject();
         try {
-            DinningTable dinningTable = new DinningTable();
+            DiningTable dinningTable = new DiningTable();
             jsonObject.put("TableID",id);
             jsonObject.put("TableFloor",selectedItem);
             jsonObject.put("SeatCount",seatCount);
             jsonObject.put("Note",note);
 
-            dinningTable.setTableid(id);
+            dinningTable.setTableID(id);
             dinningTable.setTableFloor(selectedItem);
-            dinningTable.setSeat(seatCount);
+            dinningTable.setSeatCount(seatCount);
             dinningTable.setNote(note);
 
             them(jsonObject);
@@ -252,9 +249,9 @@ public class DinningTableMainActivity extends AppCompatActivity {
         }
     }
 
-    public static void removeDinningTableByID(ArrayList<DinningTable> list, int id) {
+    public static void removeDinningTableByID(ArrayList<DiningTable> list, int id) {
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTableid() == id) {
+            if (list.get(i).getTableID() == id) {
                 list.remove(i);
                 break; // Thoát khỏi vòng lặp sau khi xóa phần tử
             }
@@ -310,7 +307,7 @@ public class DinningTableMainActivity extends AppCompatActivity {
             jsonObject.put("Note",note);
             update(jsonObject);
             int index = FindDinningTableByID(lsDinningTable,id);
-            lsDinningTable.get(index).setSeat(seatCount);
+            lsDinningTable.get(index).setSeatCount(seatCount);
             lsDinningTable.get(index).setNote(note);
             lsDinningTable.get(index).setTableFloor(selectedItem);
 //            Toast.makeText(getApplicationContext()," Tạo được  Json" ,Toast.LENGTH_LONG).show();
@@ -321,9 +318,9 @@ public class DinningTableMainActivity extends AppCompatActivity {
         }
     }
 
-    public static int FindDinningTableByID(ArrayList<DinningTable> list, int id) {
+    public static int FindDinningTableByID(ArrayList<DiningTable> list, int id) {
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTableid() == id) {
+            if (list.get(i).getTableID() == id) {
                 return i;
             }
         }

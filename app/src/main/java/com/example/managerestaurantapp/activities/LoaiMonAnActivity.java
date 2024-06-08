@@ -24,6 +24,7 @@ import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.adapters.CustomAdapterLoaiMonAn;
 import com.example.managerestaurantapp.models.LoaiMonAn;
 import com.example.managerestaurantapp.models.MonAn;
+import com.example.managerestaurantapp.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,19 +41,15 @@ public class LoaiMonAnActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     CustomAdapterLoaiMonAn adapterLoaiMon;
     ArrayList<MonAn> lsMonAn = new ArrayList<MonAn>();
-
-    String ip2 = "192.168.2.156:8080";
-
-    String ip = "192.168.1.8";
-    String urlInsert = "http://"+ip+"/Ngoc/Insert_DishCategory.php";
-    String urlDelete = "http://"+ip+"/Ngoc/Delete_DishCategory.php";//Do_An_LT_DI_Dong/Class
-    String urlUpdate= "http://"+ip+"/Ngoc/Update_DishCategory.php";
+    String urlInsert = Util.BASE_URL + "Ngoc/Insert_DishCategory.php";
+    String urlDelete = Util.BASE_URL + "Ngoc/Delete_DishCategory.php";
+    String urlUpdate= Util.BASE_URL + "Ngoc/Update_DishCategory.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loaimon_activity);
-        String url = "http://"+ip+"/Ngoc/Data_Category.php";
+        String url = Util.BASE_URL + "Ngoc/Data_Category.php";
         addControls();
         getAllDataDish(url);
         addEvents();
@@ -207,6 +204,7 @@ public class LoaiMonAnActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Loại món ăn đang được sử dụng trong các món ăn, không thể xóa.", Toast.LENGTH_LONG).show();
             } else {
                 delete(jsonObject);
+
             }
         } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), "Lỗi tạo JSON", Toast.LENGTH_LONG).show();
@@ -228,6 +226,14 @@ public class LoaiMonAnActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(LoaiMonAnActivity.this,"Xóa Thành Công" + response.toString(),Toast.LENGTH_LONG).show();
+                lsLoaiMonAn.removeIf(r -> {
+                    try {
+                        return r.getMaLoaiMonAn() == loaiMonAn.getInt("CategoryID");
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                adapterLoaiMon.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override

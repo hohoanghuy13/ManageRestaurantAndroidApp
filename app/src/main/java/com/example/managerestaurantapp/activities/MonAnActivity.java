@@ -32,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.adapters.CustomAdapterMonAn;
 import com.example.managerestaurantapp.models.MonAn;
+import com.example.managerestaurantapp.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,17 +60,15 @@ public class MonAnActivity extends AppCompatActivity {
     ImageView imgAnh;
     Spinner spinnerMaLoai;
     private Bitmap bitmap;
-   String ip2 = "192.168.2.156:8080";
-    String ip = "192.168.1.8";
-    String urlInsert = "http://"+ip+"/Ngoc/Insert_Dish.php";
-    String urlDelete = "http://"+ip+"/Ngoc/DeleteDish.php";
-    String urlUpdate= "http://"+ip+"/Ngoc/Update_dish.php";
+    String urlInsert = Util.BASE_URL + "Ngoc/Insert_Dish.php";
+    String urlDelete = Util.BASE_URL + "Ngoc/DeleteDish.php";
+    String urlUpdate= Util.BASE_URL + "Ngoc/Update_dish.php";
     private static final int PICK_IMAGE_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monan);
-        String url = "http://"+ip+"/Ngoc/Data.php";
+        String url = Util.BASE_URL + "Ngoc/Data.php";
         addControls();
         getAllDataDish(url);
         addEvents();
