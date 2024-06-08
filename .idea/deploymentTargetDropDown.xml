@@ -2,6 +2,15 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="ActivityTable">
+        <State />
+      </entry>
+      <entry key="DinningTableMainActivity">
+        <State />
+      </entry>
+      <entry key="RevenueActivity">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>

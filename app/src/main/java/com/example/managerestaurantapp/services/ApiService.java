@@ -5,6 +5,7 @@ import com.example.managerestaurantapp.models.Dish;
 import com.example.managerestaurantapp.models.DishCategory;
 import com.example.managerestaurantapp.models.Message;
 import com.example.managerestaurantapp.models.Payment;
+import com.example.managerestaurantapp.models.Revenue;
 import com.example.managerestaurantapp.models.TableDish;
 import com.example.managerestaurantapp.models.TableService;
 import com.google.gson.Gson;
@@ -27,7 +28,7 @@ public interface ApiService {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     ApiService apiService = new Retrofit.Builder()
-            .baseUrl("http://192.168.1.8/")
+            .baseUrl("http://192.168.102.159/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
@@ -77,4 +78,16 @@ public interface ApiService {
     @FormUrlEncoded
     @PATCH("apirestaurant/tabledish/{id}")
     Call<Message> updateQuantityDish(@Path("id") int serviceId, @Query("dishid") int dishId, @Field("Quantity") int quantity, @Field("UnitPrice") int unitPrice, @Field("Note") String note);
+
+    @GET("Thien/getDoanhThu.php")
+    Call<List<Revenue>> getDoanhThu(@Query("startDate") String startDate,
+                                    @Query("endDate") String endDate);
+
+    @GET("Thien/getDoanhThuCaoNhat.php")
+    Call<Revenue> getMaxDoanhThu(@Query("startDate") String startDate,
+                                 @Query("endDate") String endDate);
+    @GET("Thien/getDoanhThuThapNhat.php")
+    Call<Revenue> getMinDoanhThu(@Query("startDate") String startDate,
+                                 @Query("endDate") String endDate);
+
 }
