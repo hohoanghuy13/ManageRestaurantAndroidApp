@@ -48,7 +48,7 @@ public class DangNhapActivity extends AppCompatActivity {
     private void addCTRLs(){
         Paper.init(this);
 
-        api = RetrofitClient.getInstance(Util.BASE_URL + "/Cong/").create(Api.class);
+        api = RetrofitClient.getInstance(Util.BASE_URL).create(Api.class);
 
         txtdk = findViewById(R.id.tvTrang_DangKi);
         edtacc = findViewById(R.id.edtTaiKhoan_DN);

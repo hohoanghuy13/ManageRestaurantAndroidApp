@@ -14,20 +14,21 @@
             android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="CustomerID: "
             android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            />
+            android:text="CustomerID: "
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_CustomerID"
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:text=""
             android:gravity="center"
-            android:textSize="15dp"
-            />
+            android:text=""
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView13"
@@ -35,9 +36,9 @@
             android:layout_height="30dp"
             android:gravity="center"
             android:text="Name: "
-            android:textStyle="bold"
-            android:textSize="16dp"
-            />
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_CustomerName"
@@ -61,39 +62,41 @@
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:text="Adress: "
             android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            />
+            android:text="Adress: "
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_Adress"
             android:layout_width="220dp"
             android:layout_height="55dp"
-            android:text=""
             android:gravity="center"
-            android:textSize="15dp"
-            />
+            android:text=""
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:text="phone:"
             android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            />
+            android:text="phone:"
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_PhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"
-            android:text=""
             android:gravity="center"
-            android:textSize="15dp"
-            />
+            android:text=""
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

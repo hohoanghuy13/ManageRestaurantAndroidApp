@@ -105,7 +105,8 @@ public class RevenueActivity extends AppCompatActivity {
                             }
 
                             LineDataSet dataSet = new LineDataSet(entries, "Doanh thu");
-                            dataSet.setColors(Color.BLUE);
+                            dataSet.setColors(Color.parseColor("#006769"));
+                            dataSet.setLineWidth(3f);
                             dataSet.setValueTextSize(14f);
                             LineData lineData = new LineData(dataSet);
                             lineChart.setData(lineData);

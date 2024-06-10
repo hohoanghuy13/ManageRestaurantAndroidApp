@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFACD"
     android:padding="10dp"
     tools:context=".activities.MonAnActivity">
 
     <Button
         android:id="@+id/btnThemAnh"
-        android:layout_width="100dp"
+        android:layout_width="178dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ADD8E6"
+        android:backgroundTint="#006769"
         android:text="Thêm Ảnh" />
 
     <LinearLayout
@@ -25,7 +24,7 @@
             android:id="@+id/imgAnh"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            tools:srcCompat="@drawable/icon" />
+            tools:srcCompat="@drawable/fastfood" />
 
     </LinearLayout>
 
@@ -38,9 +37,10 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="	#6495ED"
-            android:textStyle="bold"
-            android:text="Mã món ăn:" />
+            android:text="Mã món ăn:"
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtMaMon"
@@ -61,9 +61,10 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="	#6495ED"
-            android:textStyle="bold"
-            android:text="Tên món ăn:" />
+            android:text="Tên món ăn:"
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtTenMon"
@@ -83,9 +84,10 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="	#6495ED"
-            android:textStyle="bold"
-            android:text="Đơn giá:" />
+            android:text="Đơn giá:"
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtDonGia"
@@ -107,8 +109,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mã Loại món ăn:"
-            android:textStyle="bold"
-            android:textColor="	#6495ED" />
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinnerMaLoai"
@@ -119,8 +122,11 @@
         <Button
             android:id="@+id/btnXem"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Xem tên loại" />
+            android:layout_height="match_parent"
+            android:backgroundTint="#006769"
+            android:text="..."
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -129,8 +135,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Danh sách món ăn"
-        android:textColor="#8B4513"
-        android:textSize="10pt" />
+        android:textColor="#006769"
+        android:textSize="10pt"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -142,7 +149,7 @@
             android:id="@+id/btnLuu"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:background="#7B68EE"
+            android:backgroundTint="#006769"
             android:text="Thêm"
             android:textColor="@color/white" />
 
@@ -150,7 +157,7 @@
             android:id="@+id/btnHuy"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:background="#EE82EE"
+            android:backgroundTint="#006769"
             android:text="Hủy"
             android:textColor="@color/white" />
 
@@ -158,14 +165,14 @@
             android:id="@+id/btnSua"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:background="#ADD8E6"
+            android:backgroundTint="#006769"
             android:text="Sửa" />
 
         <Button
             android:id="@+id/btnXoa"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:background="#1E90FF"
+            android:backgroundTint="#006769"
             android:text="Xóa"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -173,7 +180,7 @@
     <ListView
         android:id="@+id/lvMonAn"
         android:layout_width="match_parent"
-        android:background="#FFFACD"
-        android:layout_height="250dp" />
+        android:layout_height="250dp"
+        android:background="#FFFFFF" />
 
 </LinearLayout>

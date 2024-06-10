@@ -8,15 +8,17 @@
         android:id="@+id/tvMaLoaiMonAn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#8B4513"
+        android:text="Mã Loại"
+        android:textColor="#FF0000"
         android:textSize="28dp"
-        android:text="Mã Loại" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvTenLoaiMonAn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#6A5ACD"
+        android:text="Tên Loại"
+        android:textColor="#006769"
         android:textSize="28dp"
-        android:text="Tên Loại" />
+        android:textStyle="bold" />
 </LinearLayout>

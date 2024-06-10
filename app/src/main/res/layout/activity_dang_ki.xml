@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#006769"
     android:orientation="vertical"
     tools:context=".activities.DangKiActivity">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:textSize="35dp"
         android:gravity="center"
-        android:textStyle="bold"
-        android:text="Đăng Kí" />
+        android:text="Đăng Kí"
+        android:textColor="#006769"
+        android:textColorHint="#006769"
+        android:textSize="35dp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/edtTaiKhoan_DK"
@@ -21,8 +25,11 @@
         android:drawableLeft="@drawable/baseline_account_box_24"
         android:drawablePadding="5sp"
         android:ems="10"
+        android:hint="Tài Khoản"
         android:inputType="text"
-        android:hint="Tài Khoản"/>
+        android:textColor="#006769"
+        android:textColorHint="#006769"
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/edtMatKhau_DK"
@@ -31,8 +38,11 @@
         android:drawableLeft="@drawable/baseline_password_24"
         android:drawablePadding="5sp"
         android:ems="10"
+        android:hint="Mật Khẩu"
         android:inputType="textPassword"
-        android:hint="Mật Khẩu"/>
+        android:textColor="#006769"
+        android:textColorHint="#006769"
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/edtNhapLaiMK"
@@ -41,13 +51,18 @@
         android:drawableLeft="@drawable/baseline_password_24"
         android:drawablePadding="5sp"
         android:ems="10"
+        android:hint="Nhập Lại Mật Khẩu"
         android:inputType="textPassword"
-        android:hint="Nhập Lại Mật Khẩu"/>
+        android:textColor="#006769"
+        android:textColorHint="#006769"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnDangKi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Đăng Kí" />
+        android:backgroundTint="#006769"
+        android:text="Đăng Kí"
+        android:textSize="24sp" />
 </LinearLayout>
