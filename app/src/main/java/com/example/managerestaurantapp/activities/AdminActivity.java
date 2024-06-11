@@ -43,12 +43,6 @@ public class AdminActivity extends AppCompatActivity {
             Intent intentManage = new Intent(AdminActivity.this, CustomerMainActivity.class);
             startActivity(intentManage);
             return true;
-        } else if (itemSelected == R.id.itemEmployee) {
-            //Manage Employee
-            return true;
-        } else if (itemSelected == R.id.itemAccount) {
-            //Manage Account
-            return true;
         } else if (itemSelected == R.id.itemRevenue) {
             Intent intentManage = new Intent(AdminActivity.this, RevenueActivity.class);
             startActivity(intentManage);
