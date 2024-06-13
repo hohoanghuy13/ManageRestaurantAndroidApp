@@ -280,7 +280,6 @@ public class MonAnActivity extends AppCompatActivity {
             monAn.setTenMon(tenMon);
             monAn.setGiaMon(donGia);
             monAn.setMaLoaiMon(maLoaiMon);
-            monAn.setImageURL(imagePath);
             lsMonAn.add(monAn);
 
             refreshListView();
@@ -412,7 +411,6 @@ public class MonAnActivity extends AppCompatActivity {
             lsMonAn.get(index).setGiaMon(giaMon);
             lsMonAn.get(index).setTenMon(tenMon);
             lsMonAn.get(index).setMaLoaiMon(maLoaiMon);
-            lsMonAn.get(index).setImageURL(img);
         } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), "Lỗi Tạo Json", Toast.LENGTH_LONG).show();
         }

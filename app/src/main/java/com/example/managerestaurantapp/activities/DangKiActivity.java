@@ -35,7 +35,7 @@ public class DangKiActivity extends AppCompatActivity {
         addEvents();
     }
     private void addCTRLs(){
-        api = RetrofitClient.getInstance(Util.BASE_URL).create(Api.class);
+        api = RetrofitClient.getInstance(Util.BASE_URL + "/Cong/").create(Api.class);
 
         edtpass = findViewById(R.id.edtMatKhau_DK);
         edtrepass = findViewById(R.id.edtNhapLaiMK);

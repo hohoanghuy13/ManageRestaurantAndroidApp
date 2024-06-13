@@ -2,24 +2,12 @@ package com.example.managerestaurantapp.models;
 
 
 public class MonAn {
-    public MonAn(String imageURL, int maMon, String tenMon, int giaMon, int maLoaiMon) {
-        ImageURL = imageURL;
+    public MonAn(int maMon, String tenMon, int giaMon, int maLoaiMon) {
         MaMon = maMon;
         TenMon = tenMon;
         GiaMon = giaMon;
         MaLoaiMon = maLoaiMon;
     }
-
-    public String getImageURL() {
-        return ImageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        ImageURL = imageURL;
-    }
-
-    String ImageURL;
-
 
     public int getMaMon() {
         return MaMon;

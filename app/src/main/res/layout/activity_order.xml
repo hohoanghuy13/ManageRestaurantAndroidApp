@@ -17,12 +17,14 @@
 
     <TextView
         android:id="@+id/tvBan"
-        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
-        android:text="Bàn "/>
+        android:text="Bàn "
+        android:textColor="#006769"
+        android:textSize="24sp"
+        android:textStyle="bold" />
     <Spinner
         android:id="@+id/spinnerLoaiMon"
         android:layout_below="@+id/imgBtnBack"
@@ -40,9 +42,12 @@
 
     <Button
         android:id="@+id/btnCart"
-        android:layout_below="@+id/lvMon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cart"/>
+        android:layout_below="@+id/lvMon"
+        android:backgroundTint="#006769"
+        android:text="Cart"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

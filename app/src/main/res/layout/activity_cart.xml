@@ -17,25 +17,26 @@
         android:id="@+id/imgBack"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:backgroundTint="#FFFFFF"
         android:src="@drawable/baseline_arrow_back_ios_24" />
 
     <TextView
         android:id="@+id/tvTotal"
-        android:layout_above="@id/btnCheckout"
-        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/btnCheckout"
+        android:layout_alignParentEnd="true"
+        android:text="Tổng tiền: 0 đ"
+        android:textColor="#006769"
         android:textSize="32sp"
-        android:textStyle="bold"
-        android:text="Tổng tiền: 0 đ" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_alignParentBottom="true"
-        android:text="Thanh toán"
-        android:backgroundTint="@null"
-        android:background="#FF5722"/>
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#006769"
+        android:text="Thanh toán" />
 </RelativeLayout>

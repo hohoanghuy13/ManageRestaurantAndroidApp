@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#FFFFE0"
     android:layout_height="140dp">
 
     <ImageView
@@ -11,7 +10,7 @@
         android:layout_width="150dp"
         android:layout_height="140dp"
 
-        tools:srcCompat="@drawable/ic_launcher_background" />
+        tools:srcCompat="@drawable/fastfood" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,11 +21,14 @@
             android:id="@+id/tvMaMonAn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mã món" />
+            android:text="Mã món"
+            android:textColor="#006769"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -40,9 +42,9 @@
             android:id="@+id/tvTenMonAn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#FF0000"
-            android:text="textview" />
+            android:text="textview"
+            android:textColor="#40A578"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textView9"
@@ -63,8 +65,8 @@
             android:id="@+id/tvMaLoaiMon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#A0522D"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#006769" />
 
     </LinearLayout>
 

@@ -26,18 +26,6 @@
         android:layout_height="wrap_content"
         android:title="Manage Customers" />
     <item
-        android:id="@+id/itemEmployee"
-        android:icon="@drawable/baseline_manage_accounts_24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:title="Manage Employees" />
-    <item
-        android:id="@+id/itemAccount"
-        android:icon="@drawable/baseline_manage_accounts_24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:title="Manage Accounts" />
-    <item
         android:id="@+id/itemRevenue"
         android:icon="@drawable/baseline_manage_accounts_24"
         android:layout_width="wrap_content"
