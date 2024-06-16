@@ -2,6 +2,9 @@ package com.example.managerestaurantapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,7 +15,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ActionMenuView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.adapters.AdapterOrderDish;
@@ -51,6 +57,7 @@ public class ActivityOrder extends AppCompatActivity implements BottomSheetDialo
     List<TableService> services = new ArrayList<>();
     Order newOrder = new Order();
     int tableId;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +65,35 @@ public class ActivityOrder extends AppCompatActivity implements BottomSheetDialo
         setContentView(R.layout.activity_order);
         addControls();
 
+        toolbar = findViewById(R.id.toolbarOrder);
+        setSupportActionBar(toolbar);
+
         Intent intentTable = getIntent();
         Bundle bundleDataTable = intentTable.getExtras();
         if(bundleDataTable != null){
             tableId = bundleDataTable.getInt("tableId");
-            tvBan.setText("Bàn " + tableId);
+
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+            }
+
+            TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+            toolbarTitle.setText("Bàn " + tableId);
+
+            ActionMenuView leftMenu = findViewById(R.id.menu);
+            MenuInflater inflater = getMenuInflater();
+            Menu menu = leftMenu.getMenu();
+            inflater.inflate(R.menu.menu_item_back, menu);
+            leftMenu.setOnMenuItemClickListener(item -> {
+                if(item.getItemId() == R.id.itemBack){
+                    finish();
+                    return true;
+                }
+                return false;
+            });
         }
 
-        categories.add(new DishCategory(0, ""));
+        categories.add(new DishCategory(0, "Chọn loại món..."));
 
         loadDishes();
 
@@ -136,22 +164,16 @@ public class ActivityOrder extends AppCompatActivity implements BottomSheetDialo
                 onClickOrder(dish);
             }
         });
-        imgBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         spinnerLoaiMon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 DishCategory category = categories.get(i);
-                if(!category.getCategoryName().isEmpty()){
+                if(category.getCategoryName().equals("Chọn loại món...")){
+                    loadDataAdapterDishes(dishes);
+                }else{
                     List<Dish> lstDishFilter = new ArrayList<>();
                     lstDishFilter = dishes.stream().filter(r -> r.getCategoryID() == category.getCategoryID()).collect(Collectors.toList());
                     loadDataAdapterDishes(lstDishFilter);
-                }else{
-                    loadDataAdapterDishes(dishes);
                 }
             }
 
@@ -178,8 +200,6 @@ public class ActivityOrder extends AppCompatActivity implements BottomSheetDialo
     }
 
     void addControls(){
-        tvBan = (TextView) findViewById(R.id.tvBan);
-        imgBtnBack = (ImageButton) findViewById(R.id.imgBtnBack);
         spinnerLoaiMon = (Spinner) findViewById(R.id.spinnerLoaiMon);
         lvMon = (ListView) findViewById(R.id.lvMon);
         btnCart = (Button) findViewById(R.id.btnCart);

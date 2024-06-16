@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.managerestaurantapp.R;
+import com.example.managerestaurantapp.utils.Util;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -46,6 +48,9 @@ public class AdminActivity extends AppCompatActivity {
         } else if (itemSelected == R.id.itemRevenue) {
             Intent intentManage = new Intent(AdminActivity.this, RevenueActivity.class);
             startActivity(intentManage);
+            return true;
+        } else if(itemSelected == R.id.itemLogout) {
+            finish();
             return true;
         } else {
             return false;

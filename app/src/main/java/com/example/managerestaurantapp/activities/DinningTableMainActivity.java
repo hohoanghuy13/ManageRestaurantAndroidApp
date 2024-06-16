@@ -207,7 +207,6 @@ public class DinningTableMainActivity extends AppCompatActivity {
 
             them(jsonObject);
             lsDinningTable.add(dinningTable);
-//            Toast.makeText(getApplicationContext()," Tạo được  Json" ,Toast.LENGTH_LONG).show();
         }
         catch(JSONException e)
         {

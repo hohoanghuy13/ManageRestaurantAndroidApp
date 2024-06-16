@@ -109,21 +109,17 @@ public class DangNhapActivity extends AppCompatActivity {
                                 Util.user_current = userModel.getResult().get(0);
 
                                 Intent intent;
-                                //intent = new Intent(getApplicationContext(), MainActivity.class);
-
-
                                 String role = Util.user_current.getRole();
 
                                 if (role.equals("admin")) {
                                     intent = new Intent(getApplicationContext(), AdminActivity.class);
                                 } else if (role.equals("quanly")) {
-                                    intent = new Intent(getApplicationContext(), QLyActivity.class);
+                                    intent = new Intent(getApplicationContext(), AdminActivity.class);
                                 } else {
                                     intent = new Intent(getApplicationContext(), ActivityTable.class);
                                 }
 
                                 startActivity(intent);
-                                finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), userModel.getMessage(), Toast.LENGTH_SHORT).show();
                             }

@@ -2,6 +2,8 @@ package com.example.managerestaurantapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ActionMenuView;
 
 import com.example.managerestaurantapp.R;
 import com.example.managerestaurantapp.adapters.AdapterTableDish;
@@ -53,19 +56,30 @@ public class ActivityCart extends AppCompatActivity {
             Toast.makeText(this, "Error table invalid", Toast.LENGTH_SHORT).show();
         }
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        TextView toolbarTitle = findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("Hóa đơn bàn " + tableId);
+
+        ActionMenuView leftMenu = findViewById(R.id.menu);
+        MenuInflater inflater = getMenuInflater();
+        Menu menu = leftMenu.getMenu();
+        inflater.inflate(R.menu.menu_item_back, menu);
+        leftMenu.setOnMenuItemClickListener(item -> {
+            if(item.getItemId() == R.id.itemBack){
+                finish();
+                return true;
+            }
+            return false;
+        });
+
         getTableService(tableId);
 
-        imgBack = (ImageButton) findViewById(R.id.imgBack);
         lvCart = (ListView) findViewById(R.id.lvCart);
         btnCheckout = (Button) findViewById(R.id.btnCheckout);
         tvTotal = (TextView) findViewById(R.id.tvTotal);
-
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override

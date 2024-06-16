@@ -1,9 +1,13 @@
 package com.example.managerestaurantapp.activities;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.managerestaurantapp.R;
@@ -16,10 +20,14 @@ public class ActivityTable extends AppCompatActivity {
     TabLayout tabLayoutFloor;
     ViewPager2 vpTable;
     VPAdapterTable adapterTable;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
+
+        toolbar = findViewById(R.id.toolbarTable);
+        setSupportActionBar(toolbar);
 
         tabLayoutFloor = (TabLayout) findViewById(R.id.tabLayoutFloor);
         vpTable = (ViewPager2) findViewById(R.id.vpTable);
@@ -42,5 +50,21 @@ public class ActivityTable extends AppCompatActivity {
                 }
             }
         }).attach();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item_employee, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemSelected = item.getItemId();
+        if(itemSelected == R.id.itemLogout) {
+            finish();
+            return true;
+        }
+        return false;
     }
 }
